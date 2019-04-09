@@ -1,0 +1,11 @@
+.container{
+
+    max-width: 349px;
+    width: 100%;
+    text-align: center;
+    margin-top: 27px;
+}
+
+.custom-button{
+    margin-left: 6px;
+}
