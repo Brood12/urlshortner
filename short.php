@@ -1,23 +1,29 @@
 <?php 
-include_once("class/shortner.php");
+session_start();
+include_once("class/Shortner.php");
 
 global $gdb;
-$url = $_POST['url'];
-if(isset($url))
-{
-    $s = new shortner;
 
-    if($code = $s->makeCode($url))
+if(isset($_POST['url']))
+{
+	$url = $_POST['url'];
+
+	//shortner class object intialized
+    $shorturl = new Shortner; 
+
+    if($code = $shorturl->makeCode($url))
     {
-        echo $code;
+    	//makeCode function returns the new generated code
+        $_SESSION['feedback'] = "Generated Url is : <a href=\"http://local.urlshortner.com/{$code}\">http://local.urlshortner.com/{$code}</a>";
     }
     else
     {
-        return false;
+        $_SESSION['feedback'] = "Ops Something went Wrong";
     }
 
-}
 
+}
+header("Location:index.php");
 
 
 

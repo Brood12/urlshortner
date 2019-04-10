@@ -1,28 +1,33 @@
 <?php 
 
-if(!isset($gdb))
-{
-    $gdb = new CDatabase();
-    $gdb->Connect('localhost','root','123456','website');
-}
 class CDatabase{
+    private $host;
+    private $username;
+    private $password;
+    private $dbname;
+    public  $connection;
 
-    public function __construc()
+
+    public function __construct($host, $username, $password , $dbname)
     {
-       
+        $this->host = $host;
+        $this->username = $username;
+        $this->password = $password;
+        $this->dbname = $dbname;
     }
-
-    function Connect($host,$username,$password,$dbname)
+    public function connect()
     {
-        $this->con = new mysqli($host, $username, $password)
-        or exit("Could not connect to MySql Server : ".mysqli_error($this->con));
-
-        mysqli_select_db($this->con,$dbname)
-        or exit("Could not select Database - $dbname : ".mysqli_error($this->con));
+        try
+        {
+            $this->connection = new mysqli($this->host, $this->username, $this->password , $this->dbname)
+            or exit("Could not connect to MySql Server : ".mysqli_error($this->connection));
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();exit;
+            throw $e->getMessage();
+        }
     }
-    
-
-
 
 }
 
