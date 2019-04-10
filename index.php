@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +11,40 @@
 <body>
 <div class="container">
   <h2>Url Shortner</h2>
- 
-  <form class="form-inline" action="short.php">
+  <form class="form-inline" action="short.php" method="post">
     <div class="form-group">
       <label class="sr-only" for="email">Shorten Url:</label>
       <input type="text" class="form-control" id="url" placeholder="Enter URL"  name="url" autocomplete=off>
+     
     </div>
-    <button type="submit" class="btn btn-default custom-button">Shorten</button>
+    <input type="submit" class="btn btn-default custom-button" id="short" value="Shorten" onclick="return validate_url();">
+     <span id="url_error"></span>
   </form>
 </div>
 </body>
 </html>
+
+<script>
+
+  function validate_url()
+  {
+      var url_regex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+      var url = $('#url').val();
+      $('#url_error').html('');
+      if(url == "")
+      {
+        $('#url_error').html('<span class="error">Please enter the Url</span>').fadeIn().delay(3000).fadeOut();
+        $('#url').focus();
+        return false;
+      }
+      else if(url !="" && !url_regex.test(url))
+      {
+          $('#url_error').html('<span class="error">Invalid Url</span>').fadeIn().delay(3000).fadeOut();
+          $('#url').focus();
+          return false;
+      }
+      else{
+        return true;
+      }
+  }
+</script>
