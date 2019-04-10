@@ -14,13 +14,10 @@
   <form class="form-inline" action="short.php" method="post">
     <?php 
       if(isset($_SESSION['feedback'])){
-
         echo "<p>{$_SESSION['feedback']}</p>";
         unset($_SESSION['feedback']);
 
       }
-
-
     ?>
     <div class="form-group">
 

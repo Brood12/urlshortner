@@ -17,6 +17,7 @@ class CDatabase{
     }
     public function connect()
     {
+        //Creating database connection 
         try
         {
             $this->connection = new mysqli($this->host, $this->username, $this->password , $this->dbname)

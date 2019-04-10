@@ -12,6 +12,8 @@ if($_GET['code']!="")
 
 	if($url = $shortner->getUrl($code))
 	{
+		//redirects via htaccess file to desired locaton
+		
 		header("Location: {$url}");
 		die();
 	}
